@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,6 +12,9 @@ const testCurrencyUrl = "https://jsonplaceholder.typicode.com/photos/1";
 
 
 app.use(express.json());
+app.use(cors({
+    origin: '*'
+}));
 
 app.get('/', (req, res) => {
     console.log("Redirecting to /convert. Status Code: ", 301);
@@ -39,7 +43,8 @@ app.get('/convert', (req, res) => {
 });
 
 app.get('/getConvRates', (req, res) => {
-    axios.get(useUrl, curOptions).then((response) => {
+    const curOptions = JSON.parse(process.env.CURRENCY_OPTIONS);
+    axios.get(currency_url, curOptions).then((response) => {
         res.send(response.data);
     }).catch((error) => {
         console.error("Error Fetching Exchange Rates. Error: ", error);
