@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Josh's Currency Converter</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+
+    <body>
+        <section id="container">
+            <input type="text" id="amount" />
+
+            <select id="fromSelect">
+                <option value="test1">test1</option>
+                <option value="test2">test2</option>
+                <option value="test3">test3</option>
+                <option value="test4">test4</option>
+                <option value="test5">test5</option>
+            </select>
+
+            <select id="toSelect">
+                <option value="test1">test1</option>
+                <option value="test2">test2</option>
+                <option value="test3">test3</option>
+                <option value="test4">test4</option>
+                <option value="test5">test5</option>
+            </select>
+
+            <button id="submit">Convert</button>
+        </section>
+        
+        <section class="popMsg" id="errorMsg">
+            <p id="error">Error: Test</p>
+            <button id="dismissError">Dismiss</button>
+        </section>
+
+        <section class="popMsg" id="responseMsg">
+            <p id="response">1USD = 1GBP</p>
+            <!-- <button id="dismissResponse">Dismiss</button> -->
+        </section>
+
+        <section id="devMenu">
+            <button id="errorPopUp">Pop Up Error</button>
+            <button id="errorPopDown">Pop Down Error</button>
+        </section>
+
+
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -18,9 +18,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/convert', (req, res) => {
-    const amount = 1;
-    const from = "GBP";
-    const to = "USD";
+    const amount = req.data.amount;
+    const from = req.data.from;
+    const to = req.data.to;
     let curResponse = "";
     let countryResponse = "";
     let convPrice = 0;
@@ -35,6 +35,14 @@ app.get('/convert', (req, res) => {
         res.send({result: convPrice});
     }).catch((error) => {
         console.error("Error Fetching Exchange Rates. Error Code: ", error);
+    });
+});
+
+app.get('/getConvRates', (req, res) => {
+    axios.get(useUrl, curOptions).then((response) => {
+        res.send(response.data);
+    }).catch((error) => {
+        console.error("Error Fetching Exchange Rates. Error: ", error);
     });
 });
 
