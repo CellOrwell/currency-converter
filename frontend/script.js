@@ -1,43 +1,59 @@
 const devErrUp = document.getElementById("errorPopUp");
 const devErrDown = document.getElementById("errorPopDown");
+const devMsgUp = document.getElementById("responsePopUp");
+const devMsgDown = document.getElementById("responsePopDown");
 const errorSect = document.getElementById("errorMsg");
 const errorDismiss = document.getElementById("dismissError");
+const responseSect = document.getElementById("responseMsg");
+const responseDismiss = document.getElementById("dismissResponse");
 
 
-function errorPopUp() {
-    errorDismiss.style.display = "block";
-    errorSect.classList.add("popUp");
-    errorDismiss.classList.add("buttonUp");
+
+let canPush = true;
+
+function popUp(popUpMsg, popUpButton) {
+    popUpButton.style.display = "block";
+    popUpMsg.classList.add("popUp");
+    popUpButton.classList.add("buttonUp");
     setTimeout(() => {
-        errorSect.classList.remove("popUp"); 
-        errorDismiss.classList.remove("buttonUp");
-        errorSect.style.width = "30%";
-        errorSect.style.height = "15%";
-        errorSect.style.fontSize = "larger";
-        errorDismiss.style.width = "30%";
-        errorDismiss.style.height = "auto";
-        errorDismiss.style.fontSize = "medium";}, 750);
-}
+        popUpMsg.classList.remove("popUp"); 
+        popUpButton.classList.remove("buttonUp");
+        popUpMsg.style.width = "30%";
+        popUpMsg.style.height = "15%";
+        popUpMsg.style.fontSize = "larger";
+        popUpButton.style.width = "30%";
+        popUpButton.style.height = "auto";
+        popUpButton.style.fontSize = "medium";}, 750);
+};
 
-function errorPopDown() {
-    errorSect.classList.add("popDown");
-    errorDismiss.classList.add("buttonDown");
+function popDown(popUpMsg, popUpButton) {
+    popUpMsg.classList.add("popDown");
+    popUpButton.classList.add("buttonDown");
     setTimeout(() => {
-        errorSect.classList.remove("popDown"); 
-        errorDismiss.classList.remove("buttonDown"); 
-        errorDismiss.style.display = "none";
-        errorSect.style.width = "0";
-        errorSect.style.height = "0";
-        errorSect.style.fontSize = "0";
-        errorDismiss.style.width = "0";
-        errorDismiss.style.height = "0";
-        errorDismiss.style.fontSize = "0";}, 750);
-}
+        popUpMsg.classList.remove("popDown"); 
+        popUpButton.classList.remove("buttonDown"); 
+        popUpButton.style.display = "none";
+        popUpMsg.style.width = "0";
+        popUpMsg.style.height = "0";
+        popUpMsg.style.fontSize = "0";
+        popUpButton.style.width = "0";
+        popUpButton.style.height = "0";
+        popUpButton.style.fontSize = "0";}, 750);
+};
 
 devErrUp.addEventListener('click', () => {
-    errorPopUp();
+    popUp(errorSect, errorDismiss);
 });
 
 devErrDown.addEventListener('click', () => {
-    errorPopDown();
+    popDown(errorSect, errorDismiss);
 });
+
+devMsgUp.addEventListener('click', () => {
+    popUp(responseSect, responseDismiss);
+});
+
+devMsgDown.addEventListener('click', () => {
+    popDown(responseSect, responseDismiss);
+});
+

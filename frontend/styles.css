@@ -79,7 +79,7 @@ body {
     background-color: rgba(200, 36, 36, 0.837);
 }
 
-#dismissError {
+.dismissBtn {
     display: none;
     text-align: center;
     width: 0%;
@@ -90,7 +90,7 @@ body {
 }
 
 #responseMsg {
-
+    background-color: rgba(152, 108, 19, 0.837);
 }
 
 .popUp {
@@ -145,6 +145,8 @@ body {
     left: 0;
     background-color: black;
     height: 75%;
+    color: white;
+    text-align: center;
 }
 
 #devMenu * {
