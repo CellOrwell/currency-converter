@@ -22,9 +22,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/convert', (req, res) => {
-    const amount = req.data.amount;
-    const from = req.data.from;
-    const to = req.data.to;
+    const amount = req.query.amount;
+    const from = req.query.from;
+    const to = req.query.to;
     let curResponse = "";
     let countryResponse = "";
     let convPrice = 0;
@@ -39,6 +39,7 @@ app.get('/convert', (req, res) => {
         res.send({result: convPrice});
     }).catch((error) => {
         console.error("Error Fetching Exchange Rates. Error Code: ", error);
+        res.send({errorMsg: error});
     });
 });
 

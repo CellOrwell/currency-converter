@@ -1,10 +1,13 @@
+const amountType = document.getElementById("amount");
 const fromSelect = document.getElementById("fromSelect");
 const toSelect = document.getElementById("toSelect");
+const submitBut = document.getElementById("submit");
 
 const errorSect = document.getElementById("errorMsg");
 const errorMsg = document.getElementById("error");
 const errorDismiss = document.getElementById("dismissError");
 const responseSect = document.getElementById("responseMsg");
+const responseMsg = document.getElementById("response");
 const responseDismiss = document.getElementById("dismissResponse");
 
 let canPush = true;
@@ -19,6 +22,42 @@ window.onload = async () => {
         throwError(error, true);
     }
 }
+
+async function getConversion() {
+    let amount = 0;
+    console.log(parseFloat(amountType.value));
+    const from = fromSelect.options[fromSelect.selectedIndex].textContent;
+    const to = toSelect.options[toSelect.selectedIndex].textContent;
+
+    if(!(amount = parseFloat(amountType.value)))
+    {
+        console.error("Float Parse Failed.");
+        throwError("Please Use Numbers Only.", false);
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/convert?amount=${amount}&from=${from}&to=${to}`);
+        const data = await response.json();
+
+        if(data.hasOwnProperty(errorMsg))
+        {
+            throw new Error(data.errorMsg);
+        }
+
+        const conversion = data.result;
+
+        throwResponse(`${amount} ${from} = ${conversion} ${to}`);
+    } catch (error) {
+        throwError("Error Fetching Exchange Rates. Please Try Again Later", true);
+        return;
+    }
+}
+
+submitBut.addEventListener('click', () => {
+    console.log("clicked");
+    getConversion();
+})
 
 async function getCurrencies() {
     try{
@@ -41,6 +80,11 @@ function throwError(msg, severe) {
     {
         errorDismiss.style.display = "none";
     }
+}
+
+function throwResponse(msg) {
+    responseMsg.innerHTML = msg;
+    popUp(responseSect, responseDismiss);
 }
 
 function popUp(popUpMsg, popUpButton) {
